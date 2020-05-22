@@ -20,6 +20,10 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
+    "/launches/[flight_number]": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/past_launches": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"

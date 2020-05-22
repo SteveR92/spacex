@@ -5,8 +5,6 @@ const schema = require("./schema");
 
 const app = express();
 
-// Allow cross-origin
-
 app.use(cors());
 
 app.use(

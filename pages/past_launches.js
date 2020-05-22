@@ -4,18 +4,18 @@ import { Query } from "react-apollo";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Past_Launch from "../components/past_launches/Past_Launch.js";
+import withApollo, { clientFn } from "../libs/withApollo";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
 });
-// import LaunchItem from "./LaunchItem";
-// import MissionKey from "./MissionKey";
 
 const LAUNCHES_QUERY = gql`
   query LaunchesQuery {
     launches {
       flight_number
       mission_name
+      launch_year
       launch_date_local
       launch_success
       details
@@ -27,7 +27,6 @@ const Past_Launches = () => {
   return (
     <ApolloProvider client={client}>
       <div>
-        <h2>launches</h2>
         <Query query={LAUNCHES_QUERY}>
           {({ loading, error, data }) => {
             if (loading) return <h4>Loading...</h4>;
@@ -50,4 +49,21 @@ const Past_Launches = () => {
     </ApolloProvider>
   );
 };
-export default Past_Launches;
+
+// export default Past_Launches;
+
+export const getServerSideProps = async () => {
+  const apolloClient = clientFn();
+  // apolloClient.* https://www.apollographql.com/docs/react/api/apollo-client/#apolloclient-functions
+  // You do not use hooks like useQuery, useMutation in here
+  return {
+    props: {
+      apollo: apolloClient,
+      apolloState: {
+        data: apolloClient.cache.extract(),
+      },
+    },
+  };
+};
+
+export default withApollo(Past_Launches);

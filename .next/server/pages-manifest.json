@@ -1,1 +1,1 @@
-{"/_app":"static/development/pages/_app.js","/_document":"static/development/pages/_document.js","/_error":"static/development/pages/_error.js","/past_launches":"static/development/pages/past_launches.js"}
+{"/_app":"static/development/pages/_app.js","/_document":"static/development/pages/_document.js","/_error":"static/development/pages/_error.js","/launches/[flight_number]":"static/development/pages/launches/[flight_number].js","/past_launches":"static/development/pages/past_launches.js"}
