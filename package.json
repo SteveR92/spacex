@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
-    "server": "nodemon server.js"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "dev": "next"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/react-hooks": "^3.1.5",
     "@apollo/react-ssr": "^3.1.5",
+    "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
@@ -26,6 +27,7 @@
     "next": "^9.4.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
