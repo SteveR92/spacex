@@ -50,20 +50,20 @@ const Past_Launches = () => {
   );
 };
 
-// export default Past_Launches;
+export default Past_Launches;
 
-export const getServerSideProps = async () => {
-  const apolloClient = clientFn();
-  // apolloClient.* https://www.apollographql.com/docs/react/api/apollo-client/#apolloclient-functions
-  // You do not use hooks like useQuery, useMutation in here
-  return {
-    props: {
-      apollo: apolloClient,
-      apolloState: {
-        data: apolloClient.cache.extract(),
-      },
-    },
-  };
-};
+// export const getServerSideProps = async () => {
+//   const apolloClient = clientFn();
+//   // apolloClient.* https://www.apollographql.com/docs/react/api/apollo-client/#apolloclient-functions
+//   // You do not use hooks like useQuery, useMutation in here
+//   return {
+//     props: {
+//       apollo: apolloClient,
+//       apolloState: {
+//         data: apolloClient.cache.extract(),
+//       },
+//     },
+//   };
+// };
 
-export default withApollo(Past_Launches);
+// export default withApollo(Past_Launches);

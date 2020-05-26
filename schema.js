@@ -18,9 +18,12 @@ const LaunchType = new GraphQLObjectType({
     launch_year: { type: GraphQLString },
     launch_date_local: { type: GraphQLString },
     launch_success: { type: GraphQLBoolean },
+    tentative_max_precision: { type: GraphQLString },
     details: { type: GraphQLString },
-    // crew: { type: GraphQLString },
     rocket: { type: RocketType },
+    launch_site: { type: LaunchSite },
+    links: { type: Links },
+    payload: { type: PayloadType },
   }),
 });
 
@@ -30,6 +33,72 @@ const RocketType = new GraphQLObjectType({
     rocket_id: { type: GraphQLString },
     rocket_name: { type: GraphQLString },
     rocket_type: { type: GraphQLString },
+    first_stage: { type: FirstStage },
+    second_stage: { type: SecondStage },
+  }),
+});
+
+const LaunchSite = new GraphQLObjectType({
+  name: "launch_site",
+  fields: () => ({
+    site_name: { type: GraphQLString },
+    site_name_long: { type: GraphQLString },
+  }),
+});
+
+const Links = new GraphQLObjectType({
+  name: "links",
+  fields: () => ({
+    flickr_images: { type: new GraphQLList(GraphQLString) },
+  }),
+});
+
+const FirstStage = new GraphQLObjectType({
+  name: "first_stage",
+  fields: () => ({
+    cores: { type: new GraphQLList(coresType) },
+  }),
+});
+
+const coresType = new GraphQLObjectType({
+  name: "cores",
+  fields: () => ({
+    flight: { type: GraphQLInt },
+    block: { type: GraphQLInt },
+    gridfins: { type: GraphQLBoolean },
+    legs: { type: GraphQLBoolean },
+    reused: { type: GraphQLBoolean },
+    land_success: { type: GraphQLBoolean },
+    landing_intent: { type: GraphQLBoolean },
+    landing_type: { type: GraphQLString },
+    landing_vehicle: { type: GraphQLBoolean },
+  }),
+});
+
+const SecondStage = new GraphQLObjectType({
+  name: "second_stage",
+  fields: () => ({
+    block: { type: GraphQLInt },
+    payloads: { type: new GraphQLList(PayloadType) },
+  }),
+});
+
+const PayloadType = new GraphQLObjectType({
+  name: "payloads",
+  fields: () => ({
+    nationality: { type: GraphQLString },
+    manufacturer: { type: GraphQLString },
+    payload_type: { type: GraphQLString },
+    payload_mass_kg: { type: GraphQLInt },
+    customers: { type: new GraphQLList(GraphQLString) },
+    orbit_params: { type: new GraphQLList(OrbitParamsType) },
+  }),
+});
+
+const OrbitParamsType = new GraphQLObjectType({
+  name: "orbit_params",
+  fields: () => ({
+    reference_system: { type: GraphQLString },
   }),
 });
 

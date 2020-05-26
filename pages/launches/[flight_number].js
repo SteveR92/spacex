@@ -20,6 +20,11 @@ const LAUNCH_QUERY = gql`
         rocket_id
         rocket_name
         rocket_type
+        second_stage {
+          payloads {
+            nationality
+          }
+        }
       }
     }
   }
@@ -31,6 +36,7 @@ export default ({ flightNumber }) => {
     <ApolloProvider client={client}>
       <Query query={LAUNCH_QUERY} variables={{ flight_number }}>
         {({ loading, error, data }) => {
+          console.log({ data });
           if (loading) return <h4>Loading...</h4>;
           if (error) console.log(error);
 
@@ -40,20 +46,27 @@ export default ({ flightNumber }) => {
             launch_year,
             launch_success,
             details,
-            rocket: { rocket_id, rocket_name, rocket_type },
+            rocket: {
+              rocket_name,
+              rocket_type,
+              second_stage: {
+                payloads: [{ nationality }],
+              },
+            },
           } = data.launch;
           return (
             <div>
               Flight Number: {flight_number}
               <br />
               Mission Name: {mission_name}
+              <br />
+              nationality: {nationality}
+              <br />
+              rocket: {rocket_name}
             </div>
           );
         }}
       </Query>
-      <div>
-        <h2>Flight</h2>
-      </div>
     </ApolloProvider>
   );
 };
